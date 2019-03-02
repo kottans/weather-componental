@@ -1,6 +1,7 @@
 export default class Component {
-  constructor(host) {
+  constructor(host, props = {}) {
     this.host = host;
+    this.props = props;
     this._render();
   }
   _render() {
@@ -16,6 +17,11 @@ export default class Component {
           htmlElement.innerHTML = item;
           return htmlElement;
         } else {
+          if (typeof item.tag === 'function') {
+            const container = document.createElement('div');
+            new item.tag(container, item.props);
+            return container;
+          }
           return item;
         }
       }) // [string|HTMLElement] => [HTMLElement]
@@ -24,7 +30,7 @@ export default class Component {
         });
     }
   }
-  /* @returns {string|[string|HTMLElement]} */
+  /* @returns {string|[string|HTMLElement|Component]} */
   render() {
     return 'OMG! They wanna see me!!!!!! Aaaaaa';
   }

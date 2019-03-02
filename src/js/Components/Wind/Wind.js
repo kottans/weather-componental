@@ -1,10 +1,10 @@
 import Component from "../../framework/Component";
-export default class Temperature extends Component {
+export default class Wind extends Component {
   constructor(host, props) {
     super(host, props);
   }
 
   render() {
-    return this.props.temperature + '&deg;' + this.props.unit;
+    return [ this.props.speed + ' ' + this.props.unit ];
   }
 }
