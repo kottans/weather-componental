@@ -30,6 +30,7 @@ export default class App extends Component {
           temperature: 18,
           unit: 'C',
         },
+        // children: [], -- illegal
       },
       {
         tag: 'div',
@@ -42,6 +43,29 @@ export default class App extends Component {
           },
         ],
       },
+      {
+        tag: 'div',
+        content: 'I am a parent div',
+        attributes: [
+          {
+            name: 'title',
+            value: 'I have got children',
+          },
+        ],
+        children: [
+          {tag:'div', content:'Child 1'},
+          {
+            tag:'div',
+            content:'Child 2',
+            children: [
+              {tag:'div', content:'Child 2.1'},
+              {tag:'div', content:'Child 2.2'},
+              {tag:Temperature, props: {temperature:100, unit: 'K',}}
+            ],
+          },
+          {tag:'div', content:'Child 3'},
+        ],
+      }, // <div title="I have got children"><div>Child 1</dev><div>Child 2<d2.1/><d2.2/></dev><div>Child 2</dev> </div>
       {
         tag: Wind,
         props: {

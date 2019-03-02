@@ -46,7 +46,7 @@ export default class Component {
           }
 
           // ensure following element properties are Array
-          ['classList', 'attributes'].forEach(item => {
+          ['classList', 'attributes', 'children'].forEach(item => {
             if (element[item] && !Array.isArray(element[item])) {
               element[item] = [element[item]];
             }
@@ -59,6 +59,15 @@ export default class Component {
               container.setAttribute(attributeSpec.name, attributeSpec.value);
             });
           }
+
+          // process children
+          if (element.children) {
+            element.children.forEach(el => {
+              const htmlElement = this._vDomPrototypeElementToHtmlElement(el);
+              container.appendChild(htmlElement);
+            });
+          }
+
           return container;
         }
       }
