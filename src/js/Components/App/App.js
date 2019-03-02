@@ -32,6 +32,17 @@ export default class App extends Component {
         },
       },
       {
+        tag: 'div',
+        content: 'Me div',
+        classList: ['nice'],
+        attributes: [
+          {
+            name: 'title',
+            value: 'Me definitely nice div',
+          },
+        ],
+      },
+      {
         tag: Wind,
         props: {
           speed: 250,

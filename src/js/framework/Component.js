@@ -11,20 +11,7 @@ export default class Component {
     if (typeof content === 'string') {
       this.host.innerHTML = content;
     } else {
-      content.map(item => {
-        if (typeof item === 'string') {
-          const htmlElement = document.createElement('div');
-          htmlElement.innerHTML = item;
-          return htmlElement;
-        } else {
-          if (typeof item.tag === 'function') {
-            const container = document.createElement('div');
-            new item.tag(container, item.props);
-            return container;
-          }
-          return item;
-        }
-      }) // [string|HTMLElement] => [HTMLElement]
+      content.map(item => this._vDomPrototypeElementToHtmlElement(item)) // [string|HTMLElement] => [HTMLElement]
         .forEach(htmlElement => {
           this.host.appendChild(htmlElement);
         });
@@ -33,5 +20,49 @@ export default class Component {
   /* @returns {string|[string|HTMLElement|Component]} */
   render() {
     return 'OMG! They wanna see me!!!!!! Aaaaaa';
+  }
+
+  /**
+   *
+   * @param {string|HTMLElement|Object} element
+   * @private
+   */
+  _vDomPrototypeElementToHtmlElement(element) {
+    if (typeof element === 'string') {
+      const htmlElement = document.createElement('div'); // TODO: textNode
+      htmlElement.innerHTML = element;
+      return htmlElement;
+    } else {
+      if (element.tag) {
+        if (typeof element.tag === 'function') {
+          const container = document.createElement('div');
+          new element.tag(container, element.props);
+          return container;
+        } else {
+          // string
+          const container = document.createElement(element.tag);
+          if (element.content) {
+            container.innerHTML = element.content;
+          }
+
+          // ensure following element properties are Array
+          ['classList', 'attributes'].forEach(item => {
+            if (element[item] && !Array.isArray(element[item])) {
+              element[item] = [element[item]];
+            }
+          });
+          if (element.classList) {
+            container.classList.add(...element.classList);
+          }
+          if (element.attributes) {
+            element.attributes.forEach(attributeSpec => {
+              container.setAttribute(attributeSpec.name, attributeSpec.value);
+            });
+          }
+          return container;
+        }
+      }
+      return element;
+    }
   }
 }
