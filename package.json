@@ -1,6 +1,6 @@
 {
   "name": "weather-componental",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Weather On Componental Steroids",
   "main": "./index.html",
   "author": "OleksiyRudenko <oleksiy.rudenko@gmail.com>",
@@ -12,7 +12,7 @@
     "build-dev": "parcel build ./src/index.html --no-minify --public-url ./",
     "prebuild": "shx rm -rf dist/",
     "build": "parcel build ./src/index.html --public-url ./",
-    "publish": "push-dir --dir=dist --branch=gh-pages"
+    "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup"
   },
   "devDependencies": {
     "shx": "^0.3.2"
