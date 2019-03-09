@@ -1,6 +1,7 @@
 import Component from "../../framework/Component";
 import {Temperature} from "../Temperature/";
 import {Wind} from "../Wind";
+import {CurrentWeather} from "../CurrentWeather";
 
 export default class App extends Component {
   constructor(host) {
@@ -17,6 +18,9 @@ export default class App extends Component {
     return [
       'Temperature range',
       t1,
+      {
+        tag: CurrentWeather,
+      },
       {
         tag: Temperature,
         props: {
