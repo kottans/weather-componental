@@ -97,12 +97,9 @@ export default class App extends Component {
           {tag:'div', content:'Child 3'},
           {
             tag: 'input',
-            eventHandlers: [
-              {
-                eventType: 'change',
-                // handler: this.handleChange, // bind(this): constructor(){this.method = this.method.bind(this);}
-              },
-            ],
+            eventHandlers: {
+              change: null, // this.handleChange, // bind(this): constructor(){this.method = this.method.bind(this);}
+            },
           },
         ],
       }, // <div title="I have got children"><div>Child 1</dev><div>Child 2<d2.1/><d2.2/></dev><div>Child 2</dev> </div>

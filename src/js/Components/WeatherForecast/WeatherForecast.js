@@ -7,12 +7,28 @@ export default class WeatherForecast extends Component {
     // this.onClick = this.onClick.bind(this);
   }
 
+  bindEverything() {
+    this.onClick = this.onClick.bind(this);
+  }
+
+  onClick(e) {
+    console.log('Wow! Me clicked!!!!!');
+  }
+
   render() {
     return [
       ...this.props.forecast.map(dayFC => ({
         tag: WeatherItem,
         props: dayFC,
       })),
+      {
+        tag: 'button',
+        content: 'Click me!',
+        eventHandlers: {
+            click: this.onClick,
+          },
+      },
+
     ];
   }
 }
