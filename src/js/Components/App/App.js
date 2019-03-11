@@ -2,6 +2,8 @@ import Component from "../../framework/Component";
 import {Temperature} from "../Temperature/";
 import {Wind} from "../Wind";
 import {CurrentWeather} from "../CurrentWeather";
+import {WeatherForecast} from "../WeatherForecast";
+import {WeatherItem} from "../WeatherItem";
 
 export default class App extends Component {
   constructor(host) {
@@ -20,6 +22,31 @@ export default class App extends Component {
       t1,
       {
         tag: CurrentWeather,
+      },
+      {
+        tag:  WeatherForecast,
+        props: {
+          forecast: [
+            {
+              date: '12-MAR-19',
+              temperature: 18,
+              windSpeed: 12,
+              units: 'metric',
+            },
+            {
+              date: '13-MAR-19',
+              temperature: 19,
+              windSpeed: 5,
+              units: 'metric',
+            },
+            {
+              date: '14-MAR-19',
+              temperature: 22,
+              windSpeed: 1,
+              units: 'metric',
+            },
+          ],
+        },
       },
       {
         tag: Temperature,
