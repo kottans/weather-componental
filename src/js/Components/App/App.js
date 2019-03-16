@@ -5,6 +5,8 @@ import {CurrentWeather} from "../CurrentWeather";
 import {WeatherForecast} from "../WeatherForecast";
 import {WeatherItem} from "../WeatherItem";
 import {Counter} from "../Counter";
+import {CountControls} from "../CountControls";
+import {PrettyNumber} from "../PrettyNumber";
 
 export default class App extends Component {
   constructor(host) {
@@ -15,9 +17,17 @@ export default class App extends Component {
     console.log('I am App and I reset them all');
     return [
       {
-        tag: Counter,
+        tag: CountControls,
         props: { value: 5 },
-      }
+      },
+      {
+        tag: PrettyNumber,
+        props: { value: 5 },
+      },
+      {
+        tag: PrettyNumber,
+        props: { value: 5 },
+      },
     ];
 
     /* const t1 = document.createElement('div');

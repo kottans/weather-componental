@@ -19,7 +19,7 @@ export default class Component {
       content = [ content ];
     }
 
-    console.log(content);
+    // console.log(content);
 
     content.map(item => this._vDomPrototypeElementToHtmlElement(item)) // [string|HTMLElement] => [HTMLElement]
       .forEach(htmlElement => {
