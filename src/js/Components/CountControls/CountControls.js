@@ -1,5 +1,5 @@
 import Component from "../../framework/Component";
-export default class Counter extends Component {
+export default class CountControls extends Component {
   constructor(host, props) {
     super(host, props);
   }

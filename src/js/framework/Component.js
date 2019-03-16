@@ -7,6 +7,10 @@ export default class Component {
   }
   init() {
   }
+  updateState(stateDelta) {
+    this.state = Object.assign({}, this.state, stateDelta);
+    this._render();
+  }
   _render() {
     this.host.innerHTML = "";
     let content = this.render();
