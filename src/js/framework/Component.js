@@ -45,7 +45,7 @@ export default class Component {
       if (element.tag) {
         if (typeof element.tag === 'function') {
 
-          const container = document.createElement('div');
+          const container = document.createDocumentFragment(); // 'div');
           new element.tag(container, element.props);
 
           return container;
