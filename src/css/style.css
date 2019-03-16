@@ -36,3 +36,8 @@ div div div div div div div {
 .nice {
     background-color: aquamarine;
 }
+
+.even-nicer {
+    font-size: 2em;
+    padding: 1em;
+}

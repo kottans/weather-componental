@@ -7,7 +7,7 @@ export default class WeatherForecast extends Component {
     // this.onClick = this.onClick.bind(this);
   }
 
-  bindEverything() {
+  init() {
     this.onClick = this.onClick.bind(this);
   }
 

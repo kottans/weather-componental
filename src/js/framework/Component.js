@@ -2,10 +2,10 @@ export default class Component {
   constructor(host, props = {}) {
     this.host = host;
     this.props = props;
-    this.bindEverything();
+    this.init();
     this._render();
   }
-  bindEverything() {
+  init() {
   }
   _render() {
     this.host.innerHTML = "";
@@ -14,6 +14,8 @@ export default class Component {
     if (!Array.isArray(content)) {
       content = [ content ];
     }
+
+    console.log(content);
 
     content.map(item => this._vDomPrototypeElementToHtmlElement(item)) // [string|HTMLElement] => [HTMLElement]
       .forEach(htmlElement => {
@@ -45,14 +47,14 @@ export default class Component {
       if (element.tag) {
         if (typeof element.tag === 'function') {
 
-          const container = document.createDocumentFragment(); // 'div');
+          const container = document.createElement('div');
           new element.tag(container, element.props);
 
           return container;
         } else {
           // string
           const container = document.createElement(element.tag);
-          if (element.content) {
+          if (element.content !== undefined) {
             container.innerHTML = element.content;
           }
 
