@@ -22,12 +22,12 @@ export default class PrettyNumber extends Component {
   }
 
   render() {
-    return [
+    return this.state.value !== undefined ? [
       {
         tag: 'div',
         content: this.state.value,
         classList: 'even-nicer',
       },
-    ];
+    ] : '';
   }
 }
