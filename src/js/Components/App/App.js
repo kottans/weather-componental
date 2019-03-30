@@ -15,19 +15,57 @@ export default class App extends Component {
 
   render() {
     console.log('I am App and I reset them all');
+
+    const temperatureList = [10, 15, -20].map(temperature => ({
+      tag: Temperature,
+      // containerTag: 'li',
+      props: {
+        temperature,
+        unit: 'C',
+      },
+    }));
+
     return [
       {
+        tag: Temperature,
+        props: { temperature: 38, unit: 'F', },
+      },
+      'An unordered list',
+      {
+        tag: 'ul',
+        children: temperatureList.map(temperatureItem => ({
+          tag: 'li',
+          children: [ temperatureItem ],
+        })),
+      },
+      '<h2>Yet another UL</h2>',
+      {
+        tag: 'ul',
+        children: temperatureList.map(temperatureItem =>
+          Object.assign({},
+            temperatureItem,
+            {
+              containerTag: 'li',
+            })),
+      },
+      {
         tag: CountControls,
-        props: { value: 5 },
+        props: {
+          value: 131,
+        },
       },
       {
         tag: PrettyNumber,
-        props: { value: 5 },
+        props: {
+          value: 111,
+        },
       },
-      {
-        tag: PrettyNumber,
-        props: { value: 5 },
-      },
+      /* {
+        tag: 'div',
+        content: Temperature,
+        props: {},
+        classList: '',
+      }, */
     ];
 
     /* const t1 = document.createElement('div');

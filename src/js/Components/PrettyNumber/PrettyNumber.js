@@ -17,17 +17,24 @@ export default class PrettyNumber extends Component {
   init() {
     this.updateMyself = this.updateMyself.bind(this);
     this.state = {
-      value: 13,
+      value: this.props.value,
     };
   }
 
   render() {
-    return this.state.value !== undefined ? [
+    const element = this.state.value !== undefined ? [
       {
-        tag: 'div',
+        tag: 'span',
         content: this.state.value,
         classList: 'even-nicer',
       },
+      {
+        tag: 'span',
+        content: 'I am not a number! I am a digital (numeric) personality!'
+      },
     ] : '';
+
+    console.log('PN render', element);
+    return element;
   }
 }

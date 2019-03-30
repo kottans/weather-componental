@@ -13,7 +13,7 @@ export default class CountControls extends Component {
       .forEach(methodName => this[methodName] = this[methodName].bind(this));
     this.state = {
       value: this.props.value * 2,
-      quantifier: 7,
+      quantifier: this.props.quantifier || 7,
     };
   }
 

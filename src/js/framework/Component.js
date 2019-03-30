@@ -9,6 +9,7 @@ export default class Component {
   }
   updateState(stateDelta) {
     this.state = Object.assign({}, this.state, stateDelta);
+    console.log(this.constructor.name + '.updateState', stateDelta, this.state);
     this._render();
   }
   _render() {
@@ -23,7 +24,10 @@ export default class Component {
 
     content.map(item => this._vDomPrototypeElementToHtmlElement(item)) // [string|HTMLElement] => [HTMLElement]
       .forEach(htmlElement => {
-        this.host.appendChild(htmlElement);
+        console.log(this.constructor.name + '_render() pre-append element', htmlElement, this.host);
+        if (Array.isArray(htmlElement)) this.host.append(...htmlElement); else this.host.append(htmlElement);
+        console.log(this.constructor.name + '_render() post-append element', htmlElement, this.host);
+
       });
   }
   /* @returns {string|[string|HTMLElement|Component]} */
@@ -41,8 +45,9 @@ export default class Component {
       let container;
       const containsHtmlTags = /[<>&]/.test(element);
       if (containsHtmlTags) {
-        container = document.createElement('div');
-        container.innerHTML = element;
+        const dirtyTrickContainer = document.createElement('div'); // fake div, never actually used
+        dirtyTrickContainer.innerHTML = element;
+        container = Array.from(dirtyTrickContainer.childNodes);
       } else {
         container = document.createTextNode(element);
       }
@@ -51,8 +56,10 @@ export default class Component {
       if (element.tag) {
         if (typeof element.tag === 'function') {
 
-          const container = document.createElement('div');
+          const container = // document.createDocumentFragment();
+            document.createElement(element.containerTag || 'div');
           new element.tag(container, element.props);
+          console.log('render component', container.childNodes);
 
           return container;
         } else {
@@ -88,7 +95,8 @@ export default class Component {
           if (element.children) {
             element.children.forEach(el => {
               const htmlElement = this._vDomPrototypeElementToHtmlElement(el);
-              container.appendChild(htmlElement);
+              if (Array.isArray(htmlElement)) this.host.append(...htmlElement); else this.host.append(htmlElement);
+              // container.appendChild(htmlElement);
             });
           }
 
